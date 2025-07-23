@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { ArrowUpRight, MoreHorizontal, TrendingDown, TrendingUp } from 'lucide-react';
-import { motion, useAnimation, useInView, useMotionValue, animate } from 'framer-motion';
+import { motion, useAnimation, useInView, useMotionValue, useTransform, animate } from 'framer-motion';
 
 export interface KPICardProps {
   title: string;
@@ -22,6 +22,7 @@ export function KPICard({ title, value, change, changeLabel, icon, trend, classN
   const isPositive = change >= 0;
   const valueRef = useRef<HTMLSpanElement>(null);
   const motionValue = useMotionValue(typeof value === 'number' ? 0 : 0);
+  const transformedValue = useTransform(motionValue, (v) => Math.round(v).toLocaleString());
   const controls = useAnimation();
   const inViewRef = useRef(null);
   const isInView = useInView(inViewRef, { once: true });
@@ -91,7 +92,7 @@ export function KPICard({ title, value, change, changeLabel, icon, trend, classN
           <span className="text-2xl font-bold">
             {typeof value === 'number' ? (
               <motion.span ref={valueRef}>
-                {motionValue.to((v) => Math.round(v).toLocaleString())}
+                {transformedValue}
               </motion.span>
             ) : (
               value
