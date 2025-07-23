@@ -67,8 +67,8 @@ const plans = [
   },
   {
     id: 'enterprise',
-    name: 'Enterprise',
-    price: '$199',
+    name: 'Bussiness',
+    price: '$800',
     period: '/month',
     description: 'Full-featured solution for large organizations',
     features: [
