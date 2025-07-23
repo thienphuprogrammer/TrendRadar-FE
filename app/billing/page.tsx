@@ -87,6 +87,40 @@ const plans = [
     limitations: [],
     popular: false,
   },
+  {
+    id: 'pay-as-you-go',
+    name: 'Pay as you go & POS setup',
+    price: 'Contact us',
+    period: '',
+    description: 'Flexible pricing with comprehensive POS integration and setup services',
+    features: [
+      'Pay only for what you use',
+      'Complete POS system integration',
+      'On-site installation & setup',
+      'Staff training included',
+      'Hardware procurement assistance',
+      'Custom workflow configuration',
+      'Real-time inventory sync',
+      'Multi-location support',
+      'Advanced reporting & analytics',
+      'Dedicated account manager',
+      '24/7 technical support',
+      'Data migration services',
+      'Custom API development',
+      'Compliance & security audit',
+      'Performance optimization',
+    ],
+    limitations: [],
+    popular: false,
+    note: 'Perfect for businesses with unique requirements or seasonal operations. Includes comprehensive POS setup, training, and ongoing support.',
+    additionalInfo: [
+      'Minimum 3-month commitment',
+      'Setup fee may apply based on complexity',
+      'Hardware costs separate',
+      'Custom integrations quoted separately',
+      'Volume discounts available',
+    ],
+  },
 ];
 
 const currentPlan = {
@@ -245,7 +279,7 @@ export default function BillingPage() {
         </TabsContent>
 
         <TabsContent value="plans" className="space-y-4">
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {plans.map((plan) => (
               <Card key={plan.id} className={`relative ${plan.popular ? 'border-primary shadow-lg' : ''}`}>
                 {plan.popular && (
@@ -265,13 +299,18 @@ export default function BillingPage() {
                   </CardTitle>
                   <div>
                     <span className="text-3xl font-bold">{plan.price}</span>
-                    <span className="text-muted-foreground">{plan.period}</span>
+                    {plan.period && <span className="text-muted-foreground">{plan.period}</span>}
                   </div>
                   <p className="text-sm text-muted-foreground">{plan.description}</p>
+                  {plan.note && (
+                    <div className="mt-2 p-2 bg-blue-50 rounded-lg border border-blue-200">
+                      <p className="text-xs text-blue-700">{plan.note}</p>
+                    </div>
+                  )}
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
-                    <div className="space-y-2">
+                    <div className="space-y-2 max-h-64 overflow-y-auto">
                       {plan.features.map((feature, index) => (
                         <div key={index} className="flex items-center gap-2 text-sm">
                           <Check className="h-4 w-4 text-green-600" />
@@ -286,12 +325,27 @@ export default function BillingPage() {
                       ))}
                     </div>
                     
+                    {plan.additionalInfo && (
+                      <div className="pt-3 border-t">
+                        <h5 className="text-xs font-medium text-muted-foreground mb-2">Additional Information:</h5>
+                        <div className="space-y-1">
+                          {plan.additionalInfo.map((info, index) => (
+                            <div key={index} className="text-xs text-muted-foreground flex items-start gap-1">
+                              <span className="text-primary">•</span>
+                              <span>{info}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                    
                     <Button 
                       className="w-full" 
                       variant={plan.id === 'professional' ? 'outline' : 'default'}
                       disabled={plan.id === 'professional'}
                     >
-                      {plan.id === 'professional' ? 'Current Plan' : 'Upgrade'}
+                      {plan.id === 'professional' ? 'Current Plan' : 
+                       plan.id === 'pay-as-you-go' ? 'Contact Sales' : 'Upgrade'}
                     </Button>
                   </div>
                 </CardContent>
