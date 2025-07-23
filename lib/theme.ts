@@ -1,6 +1,10 @@
-import { type ThemeConfig } from 'next-themes';
+interface CustomThemeConfig {
+  defaultTheme: string;
+  storageKey: string;
+  themes: string[];
+}
 
-export const themeConfig: ThemeConfig = {
+export const themeConfig: CustomThemeConfig = {
   defaultTheme: 'system',
   storageKey: 'trend-radar-theme',
   themes: ['light', 'dark', 'system'],
