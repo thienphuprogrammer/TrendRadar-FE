@@ -1,10 +1,17 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { useThemeStore } from "@/hooks/use-theme-store";
+import { AuthGuard } from "@/components/AuthGuard";
+import { Sidebar } from "@/components/Sidebar";
 
 export default function RootLayoutContent({ children }: { children: React.ReactNode }) {
   const { fontSize, reducedMotion } = useThemeStore();
+  const pathname = usePathname();
+  
+  // Check if current route is an auth route
+  const isAuthRoute = pathname?.startsWith('/auth');
 
   return (
     <div
@@ -30,7 +37,24 @@ export default function RootLayoutContent({ children }: { children: React.ReactN
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10">{children}</div>
+      <div className="relative z-10">
+        {isAuthRoute ? (
+          // Auth routes don't need authentication guard
+          <AuthGuard requireAuth={false}>
+            {children}
+          </AuthGuard>
+        ) : (
+          // Protected routes need authentication
+          <AuthGuard requireAuth={true}>
+            <div className="flex h-screen bg-background">
+              <Sidebar />
+              <main className="flex-1 overflow-auto">
+                <div className="p-6">{children}</div>
+              </main>
+            </div>
+          </AuthGuard>
+        )}
+      </div>
     </div>
   );
 }
