@@ -1,0 +1,23 @@
+overwrite: true
+schema:
+  [
+    'http://localhost:3000/api/graphql'
+  ]
+generates:
+  ./lib/apollo/client/graphql/__types__.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-react-apollo
+    config:
+      namingConvention:
+        enumValues: keep
+  ./:
+    preset: near-operation-file
+    presetConfig:
+      extension: .generated.ts
+      baseTypesPath: ./lib/apollo/client/graphql/__types__.ts
+    documents: ./lib/apollo/client/graphql/!(*.generated).{ts,tsx}
+    plugins:
+      - typescript-operations
+      - typescript-react-apollo
