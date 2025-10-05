@@ -116,7 +116,7 @@ export default function LoginPage() {
 
             <div className="flex items-center justify-between">
               <Link
-                href="/auth/forgot-password"
+                href="/forgot-password"
                 className="text-sm text-blue-600 hover:text-blue-500 dark:text-blue-400"
               >
                 Quên mật khẩu?
@@ -142,7 +142,7 @@ export default function LoginPage() {
             <div className="text-center text-sm">
               <span className="text-muted-foreground">Chưa có tài khoản? </span>
               <Link
-                href="/auth/register"
+                href="/register"
                 className="text-blue-600 hover:text-blue-500 dark:text-blue-400 font-medium"
               >
                 Đăng ký ngay

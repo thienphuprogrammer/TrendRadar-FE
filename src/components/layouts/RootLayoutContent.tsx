@@ -11,8 +11,9 @@ export function RootLayoutContent({ children }: { children: React.ReactNode }) {
   const { fontSize, reducedMotion } = useThemeStore();
   const pathname = usePathname();
   
-  // Check if current route is an auth route
-  const isAuthRoute = pathname?.startsWith('/auth');
+  // Check if current route is an auth route (route groups like (auth) are not in the URL)
+  const authPaths = new Set(['/login', '/register', '/forgot-password', '/reset-password']);
+  const isAuthRoute = pathname ? authPaths.has(pathname) : false;
 
   return (
     <div

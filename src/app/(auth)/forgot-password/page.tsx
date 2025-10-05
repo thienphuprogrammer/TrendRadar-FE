@@ -63,7 +63,7 @@ export default function ForgotPasswordPage() {
             </CardDescription>
           </CardHeader>
           <CardFooter>
-            <Link href="/auth/login" className="w-full">
+            <Link href="/login" className="w-full">
               <Button variant="outline" className="w-full">
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Quay lại đăng nhập
@@ -127,7 +127,7 @@ export default function ForgotPasswordPage() {
             </Button>
             
             <Link
-              href="/auth/login"
+              href="/login"
               className="text-center text-sm text-blue-600 hover:text-blue-500 dark:text-blue-400"
             >
               <ArrowLeft className="inline mr-1 h-3 w-3" />

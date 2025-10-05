@@ -291,7 +291,7 @@ export default function RegisterPage() {
             <div className="text-center text-sm">
               <span className="text-muted-foreground">Đã có tài khoản? </span>
               <Link
-                href="/auth/login"
+                href="/login"
                 className="text-blue-600 hover:text-blue-500 dark:text-blue-400 font-medium"
               >
                 Đăng nhập ngay
