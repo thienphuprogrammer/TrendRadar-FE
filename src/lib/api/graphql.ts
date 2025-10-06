@@ -1,6 +1,6 @@
-import microCors from 'micro-cors';
 import { NextApiRequest, NextApiResponse, PageConfig } from 'next';
-import { ApolloServer } from 'apollo-server-micro';
+import { ApolloServer } from '@apollo/server';
+import { startServerAndCreateNextHandler } from '@as-integrations/next';
 import { typeDefs } from '@/lib/apollo/server';
 import resolvers from '@/lib/apollo/server/resolvers';
 import { IContext } from '@/lib/apollo/server/types';
@@ -18,8 +18,6 @@ import { components } from '@/common';
 const serverConfig = getConfig();
 const logger = getLogger('APOLLO');
 logger.level = 'debug';
-
-const cors = microCors();
 
 export const config: PageConfig = {
   api: {
@@ -170,13 +168,10 @@ const bootstrapServer = async () => {
 
 const startServer = bootstrapServer();
 
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const apolloServer = await startServer;
-  await apolloServer.createHandler({
-    path: '/api/graphql',
-  })(req, res);
-};
-
-export default cors((req: NextApiRequest, res: NextApiResponse) =>
-  req.method === 'OPTIONS' ? res.status(200).end() : handler(req, res),
-);
+  const nextHandler = startServerAndCreateNextHandler(apolloServer, {
+    context: async () => ({}),
+  });
+  return nextHandler(req, res);
+}

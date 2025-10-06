@@ -38,3 +38,14 @@ next-env.d.ts
 # jest
 coverage
 package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# vscode
+.vscode
+
+# jetbrains
+.idea
+
+# cursor
+.cursorrules

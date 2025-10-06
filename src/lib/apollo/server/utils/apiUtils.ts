@@ -10,7 +10,7 @@ import {
   WrenAIError,
   TextBasedAnswerResult,
   TextBasedAnswerStatus,
-} from '@/apollo/server/models/adaptor';
+} from '@/lib/apollo/server/models/adaptor';
 
 const { apiHistoryRepository } = components;
 

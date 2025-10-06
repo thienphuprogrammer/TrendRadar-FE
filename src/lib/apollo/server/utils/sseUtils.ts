@@ -1,5 +1,5 @@
 import { NextApiResponse } from 'next';
-import { AskResultStatus } from '@/apollo/server/models/adaptor';
+import { AskResultStatus } from '@/lib/apollo/server/models/adaptor';
 import {
   EventType,
   StateType,

@@ -8,7 +8,7 @@
 import React, { useState } from 'react';
 import { Header } from '@/components/layouts/Header';
 import { KPICard } from '@/components/common/display/KPICard';
-import { RevenueChart, SentimentChart, GeographicChart } from '@/components/chart';
+import Chart from '@/components/chart';
 import { TrendCard } from '@/components/features/trends/TrendCard';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -254,7 +254,7 @@ export default function DashboardPage() {
             <TabsContent value="charts" className="space-y-6">
               <div className="grid gap-6 lg:grid-cols-3">
                 <div className="lg:col-span-2">
-                  {isLoading ? <ChartSkeleton /> : <RevenueChart />}
+                  {isLoading ? <ChartSkeleton /> : <Chart />}
                 </div>
                 <Card className="hover:shadow-lg transition-shadow border-border/50">
                   <CardHeader>
@@ -286,8 +286,8 @@ export default function DashboardPage() {
                   </>
                 ) : (
                   <>
-                    <GeographicChart />
-                    <SentimentChart />
+                    <Chart />
+                    <Chart />
                   </>
                 )}
               </div>

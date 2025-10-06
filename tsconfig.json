@@ -24,8 +24,8 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "@server": ["./src/apollo/server/index.ts"],
-      "@server/*": ["./src/apollo/server/*"],
+      "@server": ["./src/lib/apollo/server/index.ts"],
+      "@server/*": ["./src/lib/apollo/server/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
