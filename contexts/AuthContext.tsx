@@ -97,16 +97,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setError(null);
   };
 
-  const permissions = user ? getRolePermissions(user.role) : {
-    canViewDashboard: false,
-    canViewAnalytics: false,
-    canExport: false,
-    canManageUsers: false,
-    canManageIntegrations: false,
-    canSchedulePosts: false,
-    canEditReports: false,
-    canManageBilling: false,
-  };
+  const permissions = user ? getRolePermissions(user.role) : getRolePermissions('viewer');
 
   return (
     <AuthContext.Provider value={{ 

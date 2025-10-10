@@ -28,7 +28,7 @@ const registerSchema = z.object({
   confirmPassword: z.string(),
   first_name: z.string().min(2, 'Tên phải có ít nhất 2 ký tự').optional(),
   last_name: z.string().min(2, 'Họ phải có ít nhất 2 ký tự').optional(),
-  role: z.enum(['seller', 'analyst', 'viewer']).default('seller'),
+  role: z.enum(['account_owner', 'analyst', 'viewer']).default('account_owner'),
 }).refine((data) => data.password === data.confirmPassword, {
   message: 'Mật khẩu xác nhận không khớp',
   path: ['confirmPassword'],
@@ -51,7 +51,7 @@ export default function RegisterPage() {
   } = useForm<RegisterFormData>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
-      role: 'seller',
+      role: 'account_owner',
     },
   });
 
@@ -159,17 +159,17 @@ export default function RegisterPage() {
             <div className="space-y-2">
               <Label htmlFor="role">Vai trò</Label>
               <Select
-                onValueChange={(value) => setValue('role', value as 'seller' | 'analyst' | 'viewer')}
-                defaultValue="seller"
+                onValueChange={(value) => setValue('role', value as 'account_owner' | 'analyst' | 'viewer')}
+                defaultValue="account_owner"
                 disabled={isLoading}
               >
                 <SelectTrigger>
                   <SelectValue placeholder="Chọn vai trò" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="seller">Người bán</SelectItem>
-                  <SelectItem value="analyst">Phân tích viên</SelectItem>
-                  <SelectItem value="viewer">Người xem</SelectItem>
+                  <SelectItem value="account_owner">Account Owner</SelectItem>
+                  <SelectItem value="analyst">Analyst</SelectItem>
+                  <SelectItem value="viewer">Viewer</SelectItem>
                 </SelectContent>
               </Select>
             </div>

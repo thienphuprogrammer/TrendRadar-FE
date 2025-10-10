@@ -107,6 +107,8 @@ const config: Config = {
         'bounce-slow': 'bounce 3s infinite',
         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         'blob': 'blob 7s infinite',
+        'animation-delay-2000': 'animation-delay 0s 2s',
+        'animation-delay-4000': 'animation-delay 0s 4s',
       },
       keyframes: {
         'accordion-down': {

@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { useThemeStore } from "@/hooks/use-theme-store";
 import { AuthGuard } from "@/components/AuthGuard";
-import { Sidebar } from "@/components/Sidebar";
+import { SidebarNew } from "@/components/SidebarNew";
 
 export default function RootLayoutContent({ children }: { children: React.ReactNode }) {
   const { fontSize, reducedMotion } = useThemeStore();
@@ -47,7 +47,7 @@ export default function RootLayoutContent({ children }: { children: React.ReactN
           // Protected routes need authentication
           <AuthGuard requireAuth={true}>
             <div className="flex h-screen bg-background">
-              <Sidebar />
+              <SidebarNew />
               <main className="flex-1 overflow-auto">
                 <div className="p-6">{children}</div>
               </main>
