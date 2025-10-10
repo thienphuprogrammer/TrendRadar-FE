@@ -11,11 +11,15 @@ interface AuthGuardProps {
   redirectTo?: string;
 }
 
-export function AuthGuard({ 
-  children, 
-  requireAuth = true, 
-  redirectTo = '/auth/login' 
+export function AuthGuard({
+  children,
+  requireAuth = true,
+  redirectTo = '/auth/login'
 }: AuthGuardProps) {
+  // Tạm thời tắt authentication - bỏ comment dòng dưới để bật lại
+  return <>{children}</>;
+
+  /* Uncomment để bật lại authentication
   const { user, isLoading } = useAuth();
   const router = useRouter();
 
@@ -49,4 +53,5 @@ export function AuthGuard({
   }
 
   return <>{children}</>;
+  */
 }
