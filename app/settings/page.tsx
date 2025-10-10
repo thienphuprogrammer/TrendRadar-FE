@@ -46,7 +46,7 @@ export default function SettingsPage() {
   });
 
   const [profile, setProfile] = useState({
-    name: user?.name || '',
+    name: user?.full_name || '',
     email: user?.email || '',
     phone: '+1 (555) 123-4567',
     timezone: 'America/New_York',
@@ -120,8 +120,8 @@ export default function SettingsPage() {
             <CardContent className="space-y-6">
               <div className="flex items-center gap-6">
                 <Avatar className="h-20 w-20">
-                  <AvatarImage src={user?.avatar} alt={user?.name} />
-                  <AvatarFallback className="text-lg">{user?.name?.charAt(0)}</AvatarFallback>
+                  <AvatarImage src={user?.avatar_url} alt={user?.full_name} />
+                  <AvatarFallback className="text-lg">{user?.full_name?.charAt(0)}</AvatarFallback>
                 </Avatar>
                 <div>
                   <Button variant="outline" size="sm">

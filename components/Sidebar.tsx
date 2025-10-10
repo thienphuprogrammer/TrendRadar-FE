@@ -188,16 +188,16 @@ export function Sidebar() {
           variants={contentVariants}
         >
           <Avatar className="h-9 w-9 ring-2 ring-primary/20">
-            <AvatarImage src={user?.avatar} alt={user?.name} />
+            <AvatarImage src={user?.avatar_url} alt={user?.full_name} />
             <AvatarFallback className="bg-primary/5 text-primary">
-              {user?.name?.charAt(0)}
+              {user?.full_name?.charAt(0)}
             </AvatarFallback>
           </Avatar>
-          <motion.div 
+          <motion.div
             className="flex-1 min-w-0"
             variants={contentVariants}
           >
-            <p className="text-sm font-medium truncate">{user?.name}</p>
+            <p className="text-sm font-medium truncate">{user?.full_name}</p>
             <p className="text-xs text-muted-foreground capitalize">{user?.role?.replace('_', ' ')}</p>
           </motion.div>
           <ThemeToggle />
