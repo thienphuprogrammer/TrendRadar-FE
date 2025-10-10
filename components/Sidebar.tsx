@@ -74,6 +74,19 @@ export function Sidebar() {
   const { user, permissions, logout } = useAuth();
   const [isCollapsed, setIsCollapsed] = useState(false);
 
+  // Default permissions khi không có auth - hiển thị tất cả
+  const defaultPermissions = {
+    canViewDashboard: true,
+    canViewAnalytics: true,
+    canSchedulePosts: true,
+    canEditReports: true,
+    canManageIntegrations: true,
+    canManageUsers: true,
+    canManageBilling: true,
+  };
+
+  const effectivePermissions = user ? permissions : defaultPermissions;
+
   const sidebarVariants = {
     expanded: { width: 256 },
     collapsed: { width: 80 },
@@ -116,8 +129,8 @@ export function Sidebar() {
       {/* Navigation */}
       <nav className="flex-1 space-y-4 p-4 overflow-y-auto">
         {navigation.map((section) => {
-          const visibleItems = section.items.filter(item => 
-            hasPermission(permissions, item.permission)
+          const visibleItems = section.items.filter(item =>
+            hasPermission(effectivePermissions, item.permission)
           );
           
           if (visibleItems.length === 0) return null;
@@ -183,35 +196,37 @@ export function Sidebar() {
       
       {/* Footer */}
       <div className="border-t p-4 space-y-4">
-        <motion.div 
+        <motion.div
           className="flex items-center gap-3"
           variants={contentVariants}
         >
           <Avatar className="h-9 w-9 ring-2 ring-primary/20">
-            <AvatarImage src={user?.avatar_url} alt={user?.full_name} />
+            <AvatarImage src={user?.avatar_url} alt={user?.full_name || 'Guest'} />
             <AvatarFallback className="bg-primary/5 text-primary">
-              {user?.full_name?.charAt(0)}
+              {user?.full_name?.charAt(0) || 'G'}
             </AvatarFallback>
           </Avatar>
           <motion.div
             className="flex-1 min-w-0"
             variants={contentVariants}
           >
-            <p className="text-sm font-medium truncate">{user?.full_name}</p>
-            <p className="text-xs text-muted-foreground capitalize">{user?.role?.replace('_', ' ')}</p>
+            <p className="text-sm font-medium truncate">{user?.full_name || 'Guest User'}</p>
+            <p className="text-xs text-muted-foreground capitalize">{user?.role?.replace('_', ' ') || 'guest'}</p>
           </motion.div>
           <ThemeToggle />
         </motion.div>
-        
-        <Button
-          variant="ghost"
-          size="sm"
-          className="w-full justify-start gap-3 text-muted-foreground hover:text-primary hover:bg-primary/5"
-          onClick={logout}
-        >
-          <LogOut className="h-4 w-4" />
-          <motion.span variants={contentVariants}>Sign out</motion.span>
-        </Button>
+
+        {user && (
+          <Button
+            variant="ghost"
+            size="sm"
+            className="w-full justify-start gap-3 text-muted-foreground hover:text-primary hover:bg-primary/5"
+            onClick={logout}
+          >
+            <LogOut className="h-4 w-4" />
+            <motion.span variants={contentVariants}>Sign out</motion.span>
+          </Button>
+        )}
       </div>
     </motion.div>
   );
