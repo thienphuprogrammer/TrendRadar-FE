@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { useThemeStore } from "@/hooks/use-theme-store";
 import { AuthGuard } from "@/components/AuthGuard";
 import { SidebarNew } from "@/components/SidebarNew";
+import { GlobalHeader } from "@/components/GlobalHeader";
 
 export default function RootLayoutContent({ children }: { children: React.ReactNode }) {
   const { fontSize, reducedMotion } = useThemeStore();
@@ -48,9 +49,12 @@ export default function RootLayoutContent({ children }: { children: React.ReactN
           <AuthGuard requireAuth={true}>
             <div className="flex h-screen bg-background">
               <SidebarNew />
-              <main className="flex-1 overflow-auto">
-                <div className="p-6">{children}</div>
-              </main>
+              <div className="flex-1 flex flex-col overflow-hidden">
+                <GlobalHeader />
+                <main className="flex-1 overflow-auto">
+                  <div className="p-6">{children}</div>
+                </main>
+              </div>
             </div>
           </AuthGuard>
         )}
