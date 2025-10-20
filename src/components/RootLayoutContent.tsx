@@ -40,13 +40,13 @@ export default function RootLayoutContent({ children }: { children: React.ReactN
 
       {/* Main Content */}
       <div className="relative z-10">
-        {isAuthRoute ? (
-          // Auth routes don't need authentication guard
+        {isAuthRoute || isLandingPage ? (
+          // Public routes (auth and landing) don't need authentication guard or sidebar
           <AuthGuard requireAuth={false}>
             {children}
           </AuthGuard>
         ) : (
-          // Protected routes need authentication
+          // Protected routes need authentication and sidebar
           <AuthGuard requireAuth={true}>
             <div className="flex h-screen bg-background">
               <SidebarNew />
