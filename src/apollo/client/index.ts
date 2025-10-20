@@ -72,11 +72,8 @@ const httpLink = new HttpLink({
 const client = new ApolloClient({
   link: from([apolloErrorLink, retryLink, httpLink]),
   cache: new InMemoryCache({
-    // Suppress Apollo v3.14+ deprecation warnings during build
-    // These are non-breaking warnings about future API changes
+    // Type policies for cache normalization
     typePolicies: {},
-    // Explicitly disable canonizeResults to fix deprecation warning
-    canonizeResults: false,
   }),
   defaultOptions: {
     watchQuery: {
