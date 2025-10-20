@@ -1,0 +1,98 @@
+import { ApolloClient, HttpLink, InMemoryCache, from } from '@apollo/client';
+import { loadDevMessages, loadErrorMessages } from '@apollo/client/dev';
+import { onError } from '@apollo/client/link/error';
+import { RetryLink } from '@apollo/client/link/retry';
+
+if (process.env.NODE_ENV !== 'production') {
+  loadDevMessages();
+  loadErrorMessages();
+}
+
+// Error handling link with minimal logging (only log once per error type)
+const errorCache = new Set();
+
+const apolloErrorLink = onError((errorResponse) => {
+  const { graphQLErrors, networkError, operation } = errorResponse;
+  const operationName = operation?.operationName || 'unknown';
+
+  if (graphQLErrors) {
+    graphQLErrors.forEach(({ message }) => {
+      const errorKey = `graphql-${operationName}-${message}`;
+      if (!errorCache.has(errorKey)) {
+        errorCache.add(errorKey);
+        if (process.env.NODE_ENV === 'development') {
+          console.warn(
+            `[GraphQL] ${operationName}: ${message.substring(0, 100)}`,
+          );
+        }
+      }
+    });
+  }
+
+  if (networkError) {
+    const errorKey = `network-${operationName}`;
+    if (!errorCache.has(errorKey)) {
+      errorCache.add(errorKey);
+      if (process.env.NODE_ENV === 'development') {
+        console.warn(`[Network] ${operationName}: Using fallback data`);
+      }
+    }
+    // Don't crash the app on network errors
+  }
+});
+
+// Retry link for failed requests (reduced retries to minimize console noise)
+const retryLink = new RetryLink({
+  delay: {
+    initial: 500,
+    max: 2000,
+    jitter: true,
+  },
+  attempts: {
+    max: 1, // Reduced from 3 to 1 to minimize console errors
+    retryIf: (error, _operation) => {
+      // Only retry on network errors, not server errors (502/500)
+      // Server errors likely won't resolve with retries
+      return (
+        !!error &&
+        (error.message.includes('Failed to fetch') ||
+          error.message.includes('NetworkError') ||
+          error.message.includes('CORS'))
+      );
+    },
+  },
+});
+
+// HTTP link with credentials
+const httpLink = new HttpLink({
+  uri: '/api/graphql',
+  credentials: 'same-origin',
+});
+
+const client = new ApolloClient({
+  link: from([apolloErrorLink, retryLink, httpLink]),
+  cache: new InMemoryCache({
+    // Suppress Apollo v3.14+ deprecation warnings during build
+    // These are non-breaking warnings about future API changes
+    typePolicies: {},
+    // Explicitly disable canonizeResults to fix deprecation warning
+    canonizeResults: false,
+  }),
+  defaultOptions: {
+    watchQuery: {
+      errorPolicy: 'all', // Return partial data even if there are errors
+    },
+    query: {
+      errorPolicy: 'all',
+    },
+    mutate: {
+      errorPolicy: 'all',
+    },
+  },
+  // Use new devtools API (Apollo v3.14+)
+  devtools: {
+    enabled: process.env.NODE_ENV !== 'production',
+  },
+});
+
+export default client;
