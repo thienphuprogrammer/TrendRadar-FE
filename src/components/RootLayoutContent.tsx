@@ -11,8 +11,9 @@ export default function RootLayoutContent({ children }: { children: React.ReactN
   const { fontSize, reducedMotion } = useThemeStore();
   const pathname = usePathname();
   
-  // Check if current route is an auth route
+  // Check if current route is a public route (auth or landing)
   const isAuthRoute = pathname?.startsWith('/auth');
+  const isLandingPage = pathname === '/landing';
 
   return (
     <div
