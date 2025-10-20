@@ -1,9 +1,5 @@
 import { useState } from 'react';
-
-export enum FORM_MODE {
-  CREATE = 'CREATE',
-  EDIT = 'EDIT'
-}
+import { FORM_MODE } from '@/utils/enum';
 
 export interface ModalAction<TData = any, SData = any> {
   visible: boolean;
