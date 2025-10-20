@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
-import { mockChatService } from '@/src/services/mockChatService';
-import { realChatService } from '@/src/services/realChatService';
+import { mockChatService } from '@/services/mockChatService';
+import { realChatService } from '@/services/realChatService';
 import { 
   CreateThreadInput, 
   CreateThreadResponseInput,
