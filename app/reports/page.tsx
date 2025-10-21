@@ -246,7 +246,6 @@ export default function ReportsPage() {
   if (!permissions.canEditReports) {
     return (
       <div className="space-y-6">
-        <Header title="Reports & Export" subtitle="Access denied" />
         <Card>
           <CardContent className="flex items-center justify-center h-64">
             <div className="text-center">

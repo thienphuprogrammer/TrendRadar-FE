@@ -333,11 +333,6 @@ export default function TrendExplorer() {
 
   return (
     <div className="space-y-6">
-      <Header 
-        title="Trend Explorer" 
-        subtitle="Discover trending hashtags and competitive insights"
-      />
-      
       {/* Enhanced Search and Filters with Animation */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}

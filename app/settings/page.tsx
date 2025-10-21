@@ -79,12 +79,7 @@ export default function SettingsPage() {
   };
 
   return (
-    <div className="space-y-6">
-      <Header 
-        title="Settings" 
-        subtitle="Manage your account preferences and security"
-      />
-      
+    <div className="space-y-6">    
       <Tabs defaultValue="profile" className="space-y-6">
         <TabsList className="grid w-full grid-cols-5 p-1 bg-muted/30 rounded-xl gap-1">
           <TabsTrigger value="profile" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">

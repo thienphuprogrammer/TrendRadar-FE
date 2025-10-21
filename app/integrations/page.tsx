@@ -228,7 +228,6 @@ export default function IntegrationsPage() {
   if (!permissions.canManageIntegrations) {
     return (
       <div className="space-y-6">
-        <Header title="Integrations" subtitle="Access denied" />
         <Card>
           <CardContent className="flex items-center justify-center h-64">
             <div className="text-center">
@@ -288,7 +287,6 @@ export default function IntegrationsPage() {
         title="Integrations Hub" 
         subtitle="Connect your data sources and automate workflows"
       />
-      
       <Tabs defaultValue="overview" className="space-y-6">
         <TabsList className="grid w-full grid-cols-4">
           <TabsTrigger value="overview">Overview</TabsTrigger>

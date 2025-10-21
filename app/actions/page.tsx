@@ -318,11 +318,6 @@ export default function ActionCenter() {
 
   return (
     <div className="space-y-6">
-      <Header 
-        title="Action Center" 
-        subtitle="AI-powered recommendations and automation hub"
-      />
-      
       <Tabs defaultValue="products" className="space-y-6">
         <TabsList className="grid w-full grid-cols-4">
           <TabsTrigger value="products">Smart Product Discovery</TabsTrigger>

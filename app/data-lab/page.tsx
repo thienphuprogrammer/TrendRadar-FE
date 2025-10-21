@@ -243,7 +243,6 @@ export default function DataLab() {
   if (!permissions.canViewAnalytics) {
     return (
       <div className="space-y-6">
-        <Header title="Data Lab" subtitle="Access denied" />
         <Card>
           <CardContent className="flex items-center justify-center h-64">
             <div className="text-center">
@@ -257,12 +256,7 @@ export default function DataLab() {
   }
 
   return (
-    <div className="space-y-6">
-      <Header 
-        title="Data Lab" 
-        subtitle="Self-service BI - Upload, analyze, and visualize your data"
-      />
-      
+    <div className="space-y-6">      
       <Tabs defaultValue="upload" className="space-y-6">
         <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="upload">Upload & Preview</TabsTrigger>

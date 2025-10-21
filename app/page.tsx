@@ -268,9 +268,7 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <div className="flex flex-col gap-6">
-      <Header title="Dashboard" subtitle="Business & Trend Overview" />
-      
+    <div className="flex flex-col gap-6">      
       {/* Enhanced Global Filter with Quick Date Presets */}
       <Card className="border-none shadow-none bg-muted/30">
         <CardContent className="p-4">

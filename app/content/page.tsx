@@ -229,12 +229,7 @@ export default function ContentStudio() {
   };
 
   return (
-    <div className="space-y-6">
-      <Header 
-        title="Content Studio" 
-        subtitle="AI-powered content creation and scheduling platform"
-      />
-      
+    <div className="space-y-6">      
       <Tabs defaultValue="create" className="space-y-6">
         <TabsList className="grid w-full grid-cols-4 p-1 bg-muted/30 rounded-xl gap-1">
           <TabsTrigger value="create" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">

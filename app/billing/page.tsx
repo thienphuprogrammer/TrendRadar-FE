@@ -167,7 +167,6 @@ export default function BillingPage() {
   if (!permissions.canManageBilling) {
     return (
       <div className="space-y-6">
-        <Header title="Billing & Plans" subtitle="Access denied" />
         <Card>
           <CardContent className="flex items-center justify-center h-64">
             <div className="text-center">

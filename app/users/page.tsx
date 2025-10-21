@@ -103,7 +103,6 @@ export default function UsersPage() {
   if (!permissions.canManageUsers) {
     return (
       <div className="space-y-6">
-        <Header title="Users & Roles" subtitle="Access denied" />
         <Card>
           <CardContent className="flex items-center justify-center h-64">
             <div className="text-center">

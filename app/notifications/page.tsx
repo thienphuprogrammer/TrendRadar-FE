@@ -159,12 +159,7 @@ export default function NotificationHub() {
   };
 
   return (
-    <div className="space-y-6">
-      <Header 
-        title="Notification Hub" 
-        subtitle="Real-time alerts and system notifications"
-      />
-      
+    <div className="space-y-6">      
       <Tabs defaultValue="notifications" className="space-y-6">
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="notifications">
